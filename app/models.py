@@ -15,12 +15,11 @@ class Book(models.Model):
     downloads = models.IntegerField()
     content = models.TextField()
 
-    #
-    # class Meta:
-    #     indexes = [
-    #         GinIndex(fields=['pub_date', 'title', 'author', 'content',  'description', 'downloads', 'category', 'ebook_no', 'price' ] , name='books_index')
-    #     ]
-Footer
+
+    class Meta:
+        indexes = [
+            GinIndex(fields=['pub_date', 'title', 'author', 'content',  'description', 'downloads', 'category', 'ebook_no', 'price' ] , name='books_index')
+        ]
 
 
 

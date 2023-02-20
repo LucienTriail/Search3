@@ -8,11 +8,11 @@ from .methods import *
 
 class Search(APIView):
 
-    def get(self,request):
-        serializer= BookSerializer(data=request.data)
+    def post(self,request):
+        serializer = BookSerializer(data=request.data)
         if request.data is not None:
-            list = search_all_fields(request.data)
-            serializer = BookSerializer(list,many=True)
+            result = search_all_fields(request.data)
+            serializer = BookSerializer(result,many=True)
             return JsonResponse(serializer.data)
         else:
             return JsonResponse(serializer.errors, status=400)
