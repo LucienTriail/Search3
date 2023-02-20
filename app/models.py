@@ -1,24 +1,22 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.contrib.postgres.indexes import GinIndex
 
+# isbn_10 = models.TextField()
+#     isbn_13 = models.TextField()
 
 class Book(models.Model):
-    id = models.IntegerField(primary_key=True)
+
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
-    pub_date = models.DateField()
-    category = models.TextField()
-    ebook_no = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    credits = models.TextField()
+    authors =ArrayField(models.CharField(max_length=255))
+    publishedDate = models.DateField()
+    publisher = models.TextField()
     description = models.TextField()
-    downloads = models.IntegerField()
-    content = models.TextField()
 
 
     class Meta:
         indexes = [
-            GinIndex(fields=['pub_date', 'title', 'author', 'content',  'description', 'downloads', 'category', 'ebook_no', 'price' ] , name='books_index')
+            GinIndex(fields=['publishedDate', 'title', 'authors',   'description' ] , name='books_index')
         ]
 
 

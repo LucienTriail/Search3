@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'backendSearch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_books',
+        'NAME': 'books',
         'HOST':'localhost',
         'PORT':'5432'
     }
