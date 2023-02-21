@@ -12,7 +12,7 @@ def get_data():
         print(book["volumeInfo"]["authors"])
 
         hey.append(Book(title=book["volumeInfo"]["title"], authors=book["volumeInfo"]["authors"],
-                        publishedDate=book["volumeInfo"]["publishedDate"],description=book["volumeInfo"]["description"])
+                        publishedDate=book["volumeInfo"]["publishedDate"], description=book["volumeInfo"]["description"])
                    )
     Book.objects.bulk_create(hey)
 
