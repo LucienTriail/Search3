@@ -2,24 +2,22 @@ import requests
 import django
 
 
-def get_data():
+def get_data(number):
     hey = []
-    result = requests.get(
-        'https://www.googleapis.com/books/v1/volumes?q=subject:google&startIndex=0&maxResults=40&key=AIzaSyBig4wbXKdDJx6TSzrfimU81obiP_rnPFI')
+    val = str(number)
+    result2 = requests.get(f"https://gutendex.com/books/?page={val}")
+    truc2 = result2.json()["results"]
+    for book in truc2:
 
-    truc = result.json()["items"]
-    for book in truc:
+        try:
 
+            #print(book["formats"]["text/html"], "$$$$$$$$$$$$$$ ")
 
-            try:
-
-                print(book["volumeInfo"]["title"], "$$$$$$$$$$$$$$ ")
-
-                hey.append(Book(title=book["volumeInfo"]["title"], authors=book["volumeInfo"]["authors"],
-                            publishedDate=book["volumeInfo"]["publishedDate"],
-                            description=book["volumeInfo"]["description"]))
-            except KeyError:
-                continue
+            hey.append(Book(title=book["title"], authors=book["authors"],
+                            category=book["subjects"],
+                            content=book["formats"]["text/html"]))
+        except KeyError:
+            continue
 
     Book.objects.bulk_create(hey)
 
@@ -29,8 +27,10 @@ if __name__ == '__main__':
     # import AFTER setup
     from app.methods import search_all_fields
     from app.models import Book
-    Book.objects.all().delete()
+    for i in range(31,100):
 
-    # search_all_fields("earth")
+        get_data(i)
 
 
+    # Book.objects.all().delete()
+    #search_all_fields("earth")
