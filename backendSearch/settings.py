@@ -77,8 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'books2',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 

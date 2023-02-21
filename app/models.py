@@ -9,10 +9,10 @@ from django.contrib.postgres.indexes import GinIndex
 class Book(models.Model):
     title = models.CharField(max_length=255)
     authors = ArrayField(models.CharField(max_length=255))
-    publishedDate = models.TextField()
-    description = models.CharField(max_length=10000)
+    category = ArrayField(models.CharField(max_length=2000))
+    content = models.CharField(max_length=500)
 
     class Meta:
         indexes = [
-            GinIndex(fields=['publishedDate', 'title', 'authors', 'description'], name='books_index')
+            GinIndex(fields=['title', 'category', 'authors', 'content'], name='books_index')
         ]

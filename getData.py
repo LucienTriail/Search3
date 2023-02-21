@@ -28,7 +28,9 @@ if __name__ == '__main__':
     django.setup()
     # import AFTER setup
     from app.methods import search_all_fields
+    from app.models import Book
+    Book.objects.all().delete()
 
-    search_all_fields("earth")
+    # search_all_fields("earth")
 
 
