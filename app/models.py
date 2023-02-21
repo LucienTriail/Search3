@@ -7,12 +7,12 @@ from django.contrib.postgres.indexes import GinIndex
 #     isbn_13 = models.TextField()
 
 class Book(models.Model):
-    title = models.CharField(max_length=255)
-    authors = ArrayField(models.CharField(max_length=255))
-    publishedDate = models.TextField()
-    description = models.CharField(max_length=10000)
+    title = models.CharField(max_length=8000)
+    authors = ArrayField(models.CharField(max_length=8000))
+    content = models.CharField(max_length=8000)
+    category = ArrayField(models.CharField(max_length=8000))
 
     class Meta:
         indexes = [
-            GinIndex(fields=['publishedDate', 'title', 'authors', 'description'], name='books_index')
+            GinIndex(fields=['title', 'authors', 'category'], name='books_index')
         ]
