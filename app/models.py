@@ -10,7 +10,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     authors = ArrayField(models.CharField(max_length=255))
     publishedDate = models.TextField()
-    description = models.TextField()
+    description = models.CharField(max_length=10000)
 
     class Meta:
         indexes = [
