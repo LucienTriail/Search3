@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import django
+
+django.setup()
 
 from pathlib import Path
 
@@ -76,7 +79,7 @@ WSGI_APPLICATION = 'backendSearch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'books2',
+        'NAME': 'books5',
         'HOST': 'localhost',
         'PORT': '5432'
     }

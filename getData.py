@@ -1,6 +1,8 @@
 import requests
 import django
 
+from app.models import Book
+
 
 def get_data(number):
     hey = []
@@ -27,10 +29,20 @@ if __name__ == '__main__':
     # import AFTER setup
     from app.methods import search_all_fields
     from app.models import Book
-    for i in range(31,100):
-
+    for i in range(1, 10):
         get_data(i)
 
 
     # Book.objects.all().delete()
-    #search_all_fields("earth")
+
+    from app.indexer import search_books, build_search_index
+    build_search_index()
+    results = search_books('love')
+    print('Test')
+    for result in results:
+        print(f"{result.token} ({result.count}) in {result.book.title}")
+
+    # print(res)
+    # for data in res:
+    #     print('Test')
+    #     print(data)
