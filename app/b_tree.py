@@ -1,6 +1,7 @@
 class BTree:
     class Node:
         def __init__(self, t):
+            self.children = None
             self.keys = []
             self.values = []
             self.leaf = True
