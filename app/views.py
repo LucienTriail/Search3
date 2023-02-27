@@ -1,8 +1,10 @@
+from django.core import serializers
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
 from .indexer import search_books
 from .methods import search_all_fields
+from .models import Book
 from .serializers import BookSerializer
 
 
@@ -39,4 +41,8 @@ class Issouf(APIView):
 
 class Seyba(APIView):
     def get(self, request):
-        return JsonResponse()
+        qs = Book.objects.all()
+        serializer = serializers.serialize('json', qs)
+        print("djdj", serializer)
+        print('dddddddd')
+        return JsonResponse(serializer, safe=False)
