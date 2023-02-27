@@ -1,7 +1,5 @@
-import requests
 import django
-
-from app.models import Book
+import requests
 
 
 def get_data(number):
@@ -27,15 +25,17 @@ def get_data(number):
 if __name__ == '__main__':
     django.setup()
     # import AFTER setup
-    from app.methods import search_all_fields
+    # from app.methods import search_all_fields
+    '''
     from app.models import Book
     for i in range(1, 10):
         get_data(i)
-
+    '''
 
     # Book.objects.all().delete()
 
     from app.indexer import search_books, build_search_index
+
     build_search_index()
     results = search_books('love')
     print('Test')

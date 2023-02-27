@@ -3,9 +3,8 @@ from typing import List
 
 import requests
 
-
-from .models import Book, SearchResult
 from .b_tree import BTree
+from .models import Book, SearchResult
 
 
 def build_search_index():
@@ -42,5 +41,4 @@ def build_search_index():
 
 def search_books(keyword: str) -> List[SearchResult]:
     results = SearchResult.objects.filter(token=keyword)
-    return list(results)
-
+    return results

@@ -10,11 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-
-from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -26,23 +22,25 @@ SECRET_KEY = 'django-insecure-ll^2jgyobrz@+@gp+c$hu^nl=#7(t%^e5=6mifd&_lx7vl-##0
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOCKDOWN_ADMIN = False
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
-
+    'app',
+    'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres',
-    'app'
-]
-import django
 
-django.setup()
+]
+
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,7 +78,7 @@ WSGI_APPLICATION = 'backendSearch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'books5',
+        'NAME': 'books6',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -124,3 +122,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import django
+
+django.setup()
