@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.urls import path
 
-from app.views import Search
+from app.views import Search, Issouf, Seyba
 
 urlpatterns = [
-    path('books/', Search.as_view())
+    path('books/', Search.as_view()),
+    path('books2/', Issouf.as_view()),
+    path('token/', Seyba.as_view())
 ]

@@ -41,4 +41,4 @@ def build_search_index():
 
 def search_books(keyword: str) -> List[SearchResult]:
     results = SearchResult.objects.filter(token=keyword)
-    return results
+    return list(results)
