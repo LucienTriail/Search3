@@ -1,6 +1,6 @@
 from django.contrib.postgres.fields import ArrayField
-from django.db import models
 from django.contrib.postgres.indexes import GinIndex
+from django.db import models
 
 
 # isbn_10 = models.TextField()
@@ -13,6 +13,7 @@ class Book(models.Model):
     category = ArrayField(models.CharField(max_length=8000))
 
     class Meta:
+        app_label = 'books'
         indexes = [
             GinIndex(fields=['title', 'authors', 'category'], name='books_index')
         ]
@@ -29,6 +30,9 @@ class SearchResult(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     token = models.CharField(max_length=200)
     count = models.IntegerField(default=0)
+
+    class Meta:
+        app_label = 'searchresult'
 
     def __str__(self):
         return f"{self.token} ({self.count}) in {self.book.title}"
