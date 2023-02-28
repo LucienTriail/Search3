@@ -2,7 +2,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
-from .indexer import search_books
+from .indexer import search_books, search_books_by
 from .methods import search_all_fields
 from .models import Book
 from .serializers import BookSerializer
@@ -30,7 +30,7 @@ class Issouf(APIView):
         print('lkfkfk', self.request.query_params.get('q'))
         if self.request.query_params.get('q') is not None:
             print('ici')
-            result = search_books(self.request.query_params.get('q'))
+            result = search_books_by(self.request.query_params.get('q'))
             print('result', result)
             serializer = BookSerializer(result, many=True)
             print('serializer', serializer.data)

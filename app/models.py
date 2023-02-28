@@ -1,3 +1,5 @@
+import ast
+
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex
 from django.db import models
@@ -18,7 +20,10 @@ class Book(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.title}, {self.authors} "
+        author_dict = ast.literal_eval(self.authors[0])
+        author_name = author_dict.get("name")
+        author_name = author_name.replace(',', '-')
+        return f"{self.title}, {author_name}"
 
 
 # class wordTree(models.Model):
@@ -32,3 +37,12 @@ class SearchResult(models.Model):
 
     def __str__(self):
         return f"{self.token} ({self.count}) in {self.book.title}"
+
+
+class SearchResultObject:
+    def __init__(self, book, count):
+        self.book = book
+        self.count = count
+
+    def __str__(self):
+        return f"{self.book}, {self.count} "

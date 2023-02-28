@@ -1,6 +1,9 @@
 import django
 import requests
 
+# from app.models import Book
+
+
 
 def get_data(number):
     hey = []
@@ -32,15 +35,31 @@ if __name__ == '__main__':
         get_data(i)
     '''
 
+
     # Book.objects.all().delete()
+    from app.models import Book
+    from app.indexer import search_books, build_search_index, search_books_by, search_books_Per
 
-    from app.indexer import search_books, build_search_index
+    print("41 getData")
+    # build_search_index()
+    # Recherche des livres contenant le mot clé "Python"
+    #results = search_books("Romeo")
+    # results = search_books_by("Romeo")
+    results = search_books_Per("Romeo")
 
-    build_search_index()
-    results = search_books('love')
-    print('Test')
+    # Affichage des résultats
     for result in results:
-        print(f"{result.token} ({result.count}) in {result.book.title}")
+        print(result)
+        # book_id = result['book']
+        # book = Book.objects.get(id=book_id)
+        # book_title = book.title
+        #
+        # print(type(result))
+        # print(book, ',', result['count'] )
+        #print(result)
+        # print(result, result.count)
+        # print(f"Token: {result.token}, Book: {result.book.title}, Count: {result.count}")
+        #print(f"Token: {result['token']}, Book: {result['book__title']}, Count: {result['count']}")
 
     # print(res)
     # for data in res:
