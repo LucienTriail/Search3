@@ -1,12 +1,12 @@
+import re
 from typing import List
+
 import requests
 from django.db.models import Count
 
 from .b_tree import BTree
 from .methods import search_all_fields
 from .models import Book, SearchResult, SearchResultObject
-import re
-
 
 
 def build_search_index():
@@ -54,9 +54,9 @@ def search_books(keyword: str) -> List[SearchResult]:
 def search_books_by(keyword: str) -> List[SearchResult]:
     results = (
         SearchResult.objects
-            .filter(token=keyword)
-            .values('token', 'book')
-            .annotate(count=Count('id'))
+        .filter(token=keyword)
+        .values('token', 'book')
+        .annotate(count=Count('id'))
     )
     search_results = []
     for result in results:
@@ -68,19 +68,22 @@ def search_books_by(keyword: str) -> List[SearchResult]:
 
     return search_results
 
-def search_books_Per(keyword: str) -> List[SearchResultObject]:
+
+def search_books_per(keyword: str) -> List[SearchResultObject]:
     book_list = search_all_fields(keyword)
     results = (
         SearchResult.objects
-            .filter(token=keyword)
-            .values('token', 'book')
-            .annotate(count=Count('id'))
+        .filter(token=keyword)
+        .values('token', 'book')
+        .annotate(count=Count('id'))
     )
     search_results = []
     for result in results:
         book_id = result['book']
         book = Book.objects.get(id=book_id)
-        search_result_object = SearchResultObject(book=book, count=result['count'])
+        title = book.title
+        author = book.authors[0]
+        search_result_object = SearchResultObject(book=book, count=result['count'], title=title, author=author)
         search_results.append(search_result_object)
 
     sorted_results = []
@@ -94,7 +97,6 @@ def search_books_Per(keyword: str) -> List[SearchResultObject]:
             sorted_results.append(search_result)
 
     return sorted_results
-
 
 
 '''

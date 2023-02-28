@@ -39,10 +39,11 @@ class SearchResult(models.Model):
         return f"{self.token} ({self.count}) in {self.book.title}"
 
 
-class SearchResultObject:
-    def __init__(self, book, count):
-        self.book = book
-        self.count = count
+class SearchResultObject(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    count = models.IntegerField(default=0)
+    title = models.CharField(max_length=700)
+    author = models.CharField(max_length=700)
 
-    def __str__(self):
-        return f"{self.book}, {self.count} "
+    # def __str__(self):
+    #     return f"{self.book}, {self.count} "
